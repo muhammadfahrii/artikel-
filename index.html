@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artikel</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet"
+    href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1 class="judul">Mywebsite</h1>
+        <ul class="navbar">
+          <li><a href="#" class="active">News</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="hero"></div>
+      <div id="content">
+        <!-- Content for the current page will be displayed here -->
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <a href="#" id="prev">&laquo;</a>
+        <a href="#" class="page-link active" data-page="1">1</a>
+        <a href="#" class="page-link" data-page="2">2</a>
+        <a href="#" class="page-link" data-page="3">3</a>
+        <a href="#" id="next">&raquo;</a>
+      </div>
+
+      <!--social links--->
+      <div class="share">
+        <div class="social">
+          <a href="https://www.facebook.com/profile.php?id=61558260203484"
+            ><i class="bx bxl-facebook"></i
+          ></a>
+          <a href="https://twitter.com/Gggaming698746"
+            ><i class="bx bxl-twitter"></i
+          ></a>
+          <a href="https://www.linkedin.com/in/muhammad-fahri-b6741b309/"
+            ><i class="bx bxl-linkedin"></i
+          ></a>
+          <a href="https://www.instagram.com/muhammad_fahri1.0/"
+            ><i class="bx bxl-instagram"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const contentDiv = document.getElementById("content");
+        const pageLinks = document.querySelectorAll(".page-link");
+        const prevLink = document.getElementById("prev");
+        const nextLink = document.getElementById("next");
+        let currentPage = 1;
+        const totalPages = 3;
+
+        const pageContents = {
+          1: `
+          <h2>Judul artikel 1</h2>
+          <p class="penulis">
+          ditulis oleh <a href="#">muhammad fahri</a>pada 9 mei 2024
+        </p>
+
+        <p>
+          kementrian komunikasi dan informatika (kominfo) mengungkapkan pengguna
+          internet di indonesia saat ini mencapai 63 juta orang. berdasarkan
+          angka tersebut, 95 persennya menggunakan pengguna internet untuk
+          mengakses jejaring sosial, saat ini hampir semua orang menggunakan
+          internet setiap hari. informasi, seperti video berita,artikel dan
+          musik dapat diperoleh melalui serch engine atau mesin pencarian
+          seperti google. selain itu, dengan internet seseorang dapat terhubung
+          dengan teman dan keluarga melalui situs web yang disebut situs media
+          sosial seperti Facebook, Twitter, dan instagram yang memungkinkannya
+          untuk berbagi cerita ataupun menggunggah gambar dan video.
+        </p>
+
+        <p>1. konsep kewargaan digital</p>
+
+        <p>
+          komunikasi antarindividu dan beberapa individu sekaligus selain dapat
+          terjadi di dunia nyata, juga dapat berlangsung melalui internet yang
+          sering kita sebut dunia maya. berbagi karakteristik , opini, ide,
+          gagasan, dan tujuan yang berbeda, baik ataupun buruk dapat tertuang di
+          dunia maya. oleh karena itu, dunia maya memungkinkan terjadinya
+          komunikasi tanpa mempertemukan individu-individunya secara langsung
+          sehingga dapat mengakibatkan seseorang melupakan norma-norma sopan
+          santun, bertanggung jawab, dan etika dalam berkomunikasi.
+        </p>
+
+        <p>a. lingkungan belajar dan akademis</p>
+
+        <p>
+          siswa dan pengajar di lingkungan akademis telah memanfaatkan teknologi
+          informasi dan kemudahan akses yang dapat digunakan untuk kegiatan
+          belajar mengajar. lingkungan tersebut memiliki komponen sebagai
+          berikut.
+        </p>
+
+        <p>1. akses digital</p>
+
+        <p>
+          setiap pengguna teknologi informasi dan komunikasi sadar bahwa setiap
+          orang seharusnya meimiliki hak yang sama untuk melakukan akses digital
+          berupa internet.
+        </p>
+
+        `,
+          2: `
+          <h2>Judul artikel 2</h2>
+          <p>2.komunikasi digital</p>
+
+        <p>
+          setiap warga digital diharpkan dapat mengetahui kelebihan dan
+          kekurangan setiap bentuk komunikasi digital yang ada seperti layanan
+          email, chat, dan forum sehingga dapat memilih bentuk komunikasi yang
+          tepat sesuai dengan kebutuhan.
+        </p>
+
+        <p>3. literasi digital</p>
+
+        <p>
+          literasi digital merupakan proses belajar mengajar tentang teknologi
+          dan pemanfaatan teknologi. siswa dan pengajar diharapkan dapat belajar
+          apa saja, kapan saja, dan dari mana saja. saat teknologi baru muncul,
+          para siswa dan pengajar diharapkan dapat beradaptasi
+        </p>
+        `,
+          3: `
+          <h2>Judul artikel 3</h2>
+          <p>
+          Dampak Kesenjangan Sosial Terhadap Stabilitas Sosial Selain menghambat
+          pembangunan, kesenjangan sosial juga dapat mengancam stabilitas sosial
+          suatu masyarakat:
+        </p>
+        `,
+        };
+
+        function loadPageContent(page) {
+          contentDiv.innerHTML =
+            pageContents[page] || "No content available for this page.";
+        }
+
+        function updateActivePage(newPage) {
+          pageLinks.forEach((link) => {
+            if (parseInt(link.getAttribute("data-page")) === newPage) {
+              link.classList.add("active");
+            } else {
+              link.classList.remove("active");
+            }
+          });
+        }
+
+        pageLinks.forEach((link) => {
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+            const page = parseInt(event.target.getAttribute("data-page"));
+            currentPage = page;
+            loadPageContent(page);
+            updateActivePage(page);
+          });
+        });
+
+        prevLink.addEventListener("click", (event) => {
+          event.preventDefault();
+          if (currentPage > 1) {
+            currentPage--;
+            loadPageContent(currentPage);
+            updateActivePage(currentPage);
+          }
+        });
+
+        nextLink.addEventListener("click", (event) => {
+          event.preventDefault();
+          if (currentPage < totalPages) {
+            currentPage++;
+            loadPageContent(currentPage);
+            updateActivePage(currentPage);
+          }
+        });
+
+        // Load content for the initial page
+        loadPageContent(currentPage);
+      });
+    </script>
+  </body>
+</html>
